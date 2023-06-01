@@ -33,4 +33,5 @@
 	<suppress files="[\\/]RoomType[\./]" checks="[a-zA-Z0-9]*"/>
 	<suppress files="[\\/]LayoutSolver[\./]" checks="[a-zA-Z0-9]*"/>
 	<suppress files="com[/\\]thatgamerblue[/\\]snake[/\\]" checks=".*"/>
+	<suppress files="runescape-client[\\/]" checks="."/>
 </suppressions>
