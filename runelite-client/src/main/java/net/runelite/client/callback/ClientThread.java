@@ -113,12 +113,12 @@ public class ClientThread implements Executor
 		});
 	}
 
-	void invoke()
+	public void invoke()
 	{
 		invokeList(invokes);
 	}
 
-	void invokeTickEnd()
+	public void invokeTickEnd()
 	{
 		invokeList(invokesAtTickEnd);
 	}
