@@ -194,6 +194,12 @@ public abstract class ScriptVMMixin implements RSClient
 		}
 	}
 
+	@Copy("runScriptLogic")
+	static void copy$runScriptLogic(RSScriptEvent event, RSScript var4, int maxExecutionTime, int var2)
+	{
+
+	}
+
 	@Inject
 	@Override
 	public void runScript(Object... args)
