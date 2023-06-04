@@ -1,5 +1,6 @@
 package net.unethicalite.api.movement;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Actor;
 import net.runelite.api.Client;
@@ -142,10 +143,8 @@ public class Movement
 		return walkTo(new WorldPoint(x, y, plane));
 	}
 
-	public static boolean walkToInteract(Actor actor, String action)
+	public static boolean walkToInteract(@NonNull Actor actor, String action)
 	{
-		if (actor == null)
-			return false;
 		return walkToInteract(actor, action, actor.getWorldLocation());
 	}
 
@@ -165,7 +164,7 @@ public class Movement
 			return true;
 		}
 
-		// walkTo if not reachable or far away
+		// Walk towards if not interactable or far away
 		if (actor == null || actor.distanceTo(local) > 20 || !Reachable.isInteractable(actor))
 		{
 			return Movement.walkTo(worldArea);
@@ -173,10 +172,8 @@ public class Movement
 		return true;
 	}
 
-	public static boolean walkToInteract(TileObject tileObject, String action)
+	public static boolean walkToInteract(@NonNull TileObject tileObject, String action)
 	{
-		if (tileObject == null)
-			return false;
 		return walkToInteract(tileObject, action, tileObject.getWorldLocation());
 	}
 
@@ -189,14 +186,16 @@ public class Movement
 	{
 		Player local = Players.getLocal();
 
-		// Cancel walkTo when interactable
+		// Interact if idle and interactable
+		// There's not an easy way to tell if the player is already interacting with a tileObject,
+		// so we just check isIdle
 		if (tileObject != null && Reachable.isInteractable(tileObject) && local.isIdle())
 		{
 			tileObject.interact(action);
 			return true;
 		}
 
-		// walkTo if not reachable or far away
+		// Walk towards if not reachable or far away
 		if (tileObject == null || tileObject.distanceTo(local) > 20 || !Reachable.isInteractable(tileObject))
 		{
 			return Movement.walkTo(worldArea);
